@@ -70,13 +70,13 @@ namespace UbioWeldingLtd
 		{
 			List<GUIContent> contentList = new List<GUIContent>();
 
-			List<ProtoTechNode> rdTechs = AssetBase.RnDTechTree.GetTreeTechs().ToList();
+			List<RDTech> rdTechs = AssetBase.RnDTechTree.GetTreeTechs().ToList();
 
 			Debug.Log(string.Format("{0} rdTechs.Count = {1}", Constants.logPrefix, rdTechs.Count()));
 			foreach (string techID in techList)
 			{
 				string techTitle = techID; //for case, when techID will not be found - the length of the list of titles always must match the length of the list of techID's.
-				foreach (ProtoTechNode rdTech in rdTechs)
+				foreach (RDTech rdTech in rdTechs)
 				{
 					if (rdTech.techID == techID)
 					{

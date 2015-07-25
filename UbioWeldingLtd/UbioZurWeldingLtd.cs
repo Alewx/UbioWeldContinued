@@ -46,7 +46,7 @@ namespace UbioWeldingLtd
 		private Part _selectedPartbranch;
 		private RaycastHit _hit;
 		private Ray _ray;
-		private EditorFacility _editorFacility;
+		//private EditorFacility _editorFacility;
 
 		private AdvancedGUITextArea _textAreaDescription = new AdvancedGUITextArea();
 		private AdvancedGUITextField _textFieldTitle = new AdvancedGUITextField();
@@ -130,7 +130,7 @@ namespace UbioWeldingLtd
 		{
 			if (!EditorLockManager.isEditorLocked())
 			{
-				if (EditorLogic.RootPart != null)
+				if (EditorLogic.startPod != null)
 				{
 					if (_state != DisplayState.mainWindow)
 					{
@@ -228,7 +228,7 @@ namespace UbioWeldingLtd
 		{
 			initGUI();
 			EditorLockManager.resetEditorLocks();
-			_editorFacility = EditorDriver.editorFacility;
+			//_editorFacility = EditorDriver.editorFacility;
 		}
 
 
@@ -278,7 +278,7 @@ namespace UbioWeldingLtd
 			{
 				part.SetHighlightType(Part.HighlightType.OnMouseOver);
 				part.SetHighlightColor(Color.magenta);
-				part.SetHighlight(true, true);
+				part.SetHighlight(true);
 			}
 		}
 
@@ -515,7 +515,7 @@ namespace UbioWeldingLtd
 				{
 					if (_selectedPartbranch == null)
 					{
-						_selectedPartbranch = EditorLogic.RootPart;
+						_selectedPartbranch = EditorLogic.startPod;
 					}
 					weldPart(_selectedPartbranch);
 				}
@@ -889,9 +889,11 @@ namespace UbioWeldingLtd
 				if (_selectedPartbranch != null)
 				{
 					disablePartHighlight(_selectedPartbranch);
-					EditorLogic.fetch.OnSubassemblyDialogDismiss(EditorLogic.RootPart);
-					Debug.Log(string.Format("{0}{1} {2} - {3}", Constants.logPrefix, _config.clearEditor, _selectedPartbranch, EditorLogic.SelectedPart));
-					EditorLogic.DeletePart(EditorLogic.RootPart);
+					//EditorLogic.fetch.OnSubassemblyDialogDismiss(EditorLogic.startPod);
+					EditorLogic.fetch.PartSelected = EditorLogic.startPod;
+					Debug.Log(string.Format("{0}{1} {2} - {3}", Constants.logPrefix, _config.clearEditor, _selectedPartbranch, EditorLogic.startPod));
+					EditorLogic.fetch.DestroySelectedPart();
+					EditorPartList.Instance.Refresh();
 					_selectedPartbranch = null;
 				}
 			}

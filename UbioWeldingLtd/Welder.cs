@@ -762,20 +762,20 @@ namespace UbioWeldingLtd
 				_listedTechs.Add(newpart.partInfo.TechRequired);
 			}
 
-			if (!string.IsNullOrEmpty(newpart.partInfo.bulkheadProfiles))
-			{
-				_bulkheadProfiles = newpart.partInfo.bulkheadProfiles;
-			}
+			//if (!string.IsNullOrEmpty(newpart.partInfo.bulkheadProfiles))
+			//{
+			//	_bulkheadProfiles = newpart.partInfo.bulkheadProfiles;
+			//}
 
-			if (newpart.CoLOffset != null && newpart.CoLOffset != Vector3.zero)
-			{
-				_CoLOffset += newpart.CoLOffset;
-			}
+			//if (newpart.CoLOffset != null && newpart.CoLOffset != Vector3.zero)
+			//{
+			//	_CoLOffset += newpart.CoLOffset;
+			//}
 
-			if (newpart.CoPOffset != null && newpart.CoPOffset != Vector3.zero)
-			{
-				_CoPOffset += newpart.CoPOffset;
-			}
+			//if (newpart.CoPOffset != null && newpart.CoPOffset != Vector3.zero)
+			//{
+			//	_CoPOffset += newpart.CoPOffset;
+			//}
 
 			if (newpart.explosionPotential != 0)
 			{
@@ -801,41 +801,41 @@ namespace UbioWeldingLtd
 				}
 			}
 
-			if (newpart.emissiveConstant != 0)
-			{
-				if (_emissiveConstant == 0)
-				{
-					_emissiveConstant = newpart.emissiveConstant;
-				}
-				else
-				{
-					_emissiveConstant = (_emissiveConstant + newpart.emissiveConstant) / 2;
-				}
-			}
+			//if (newpart.emissiveConstant != 0)
+			//{
+			//	if (_emissiveConstant == 0)
+			//	{
+			//		_emissiveConstant = newpart.emissiveConstant;
+			//	}
+			//	else
+			//	{
+			//		_emissiveConstant = (_emissiveConstant + newpart.emissiveConstant) / 2;
+			//	}
+			//}
 
-			if (newpart.thermalMassModifier != 0)
-			{
-				if (_thermalMassModifier == 0)
-				{
-					_thermalMassModifier = newpart.thermalMassModifier;
-				}
-				else
-				{
-					_thermalMassModifier = (_thermalMassModifier + newpart.thermalMassModifier) / 2;
-				}
-			}
+			//if (newpart.thermalMassModifier != 0)
+			//{
+			//	if (_thermalMassModifier == 0)
+			//	{
+			//		_thermalMassModifier = newpart.thermalMassModifier;
+			//	}
+			//	else
+			//	{
+			//		_thermalMassModifier = (_thermalMassModifier + newpart.thermalMassModifier) / 2;
+			//	}
+			//}
 
-			if (newpart.radiatorHeadroom != 0)
-			{
-				if (_radiatorHeadroom == 0)
-				{
-					_radiatorHeadroom = newpart.radiatorHeadroom;
-				}
-				else
-				{
-					_radiatorHeadroom = (_radiatorHeadroom + newpart.radiatorHeadroom) / 2;
-				}
-			}
+			//if (newpart.radiatorHeadroom != 0)
+			//{
+			//	if (_radiatorHeadroom == 0)
+			//	{
+			//		_radiatorHeadroom = newpart.radiatorHeadroom;
+			//	}
+			//	else
+			//	{
+			//		_radiatorHeadroom = (_radiatorHeadroom + newpart.radiatorHeadroom) / 2;
+			//	}
+			//}
 
 			//reads the vesseltype if that exists
 			Debugger.AdvDebug(string.Format(".. VesselType - {0}", newpart.vesselType), _advancedDebug);
