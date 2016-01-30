@@ -456,7 +456,7 @@ namespace UbioWeldingLtd
 				case Constants.modStockAnchdec:
 					{
 						//Decoupler: Change node name
-						string decouplename = newModule.GetValue("explosiveNodeID") + partname + modulelist.Count;
+						string decouplename = newModule.GetValue("explosiveNodeID") + (newModule.GetValue("explosiveNodeID") == "srf" ? "" : partname + modulelist.Count);
 						newModule.SetValue("explosiveNodeID", decouplename);
 						break;
 					}

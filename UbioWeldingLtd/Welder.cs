@@ -85,6 +85,9 @@ namespace UbioWeldingLtd
 		private float _breakingForce = 0.0f;
 		private float _breakingTorque = 0.0f;
 		private float _maxTemp = 0.0f;
+		private int _stageOffset = int.MaxValue;
+		private int _childStageOffset = int.MaxValue;
+		private string _stagingIcon;
 
 		private bool _fuelCrossFeed = false;
 
@@ -900,6 +903,26 @@ namespace UbioWeldingLtd
 			//completly outdates as it looks
 			_dragModel = "default";
 
+			if (newpart.stagingIcon != null && _stagingIcon != newpart.stagingIcon)
+			{
+				_stagingIcon = newpart.stagingIcon;
+			}
+			if (newpart.stageOffset != 0)
+			{
+				if (newpart.stageOffset < _stageOffset)
+				{
+					_stageOffset = newpart.stageOffset;
+				}
+			}
+			if (newpart.childStageOffset != 0)
+			{
+				if (newpart.childStageOffset < _childStageOffset)
+				{
+					_childStageOffset = newpart.childStageOffset;
+				}
+			}
+
+
 			//average crash, breaking and temp
 			switch (_StrengthCalcMethod)
 			{
@@ -1416,7 +1439,8 @@ namespace UbioWeldingLtd
 						//	}
 						case Constants.modStockAnchdec:
 							{//Decoupler: Change node name
-								string decouplename = newModule.GetValue("explosiveNodeID") + partname + _partNumber;
+
+								string decouplename = newModule.GetValue("explosiveNodeID") + (newModule.GetValue("explosiveNodeID") == "srf" ? "" : partname + _partNumber);
 								newModule.SetValue("explosiveNodeID", decouplename);
 								break;
 							}
@@ -1599,6 +1623,20 @@ namespace UbioWeldingLtd
 			partconfig.AddValue("breakingForce", WeldingHelpers.RoundFloat(_breakingForce, _precisionDigits));
 			partconfig.AddValue("breakingTorque", WeldingHelpers.RoundFloat(_breakingTorque, _precisionDigits));
 			partconfig.AddValue("maxTemp", WeldingHelpers.RoundFloat(_maxTemp, _precisionDigits));
+
+			//decouplervalues
+			if (_stagingIcon != null)
+			{
+				partconfig.AddValue("stagingIcon", _stagingIcon);
+			}
+			if (_stageOffset < int.MaxValue)
+			{
+				partconfig.AddValue("stageOffset", _stageOffset);
+			}
+			if (_stageOffset < int.MaxValue)
+			{
+				partconfig.AddValue("childStageOffset", _childStageOffset);
+			}
 
 			//add if crossfeed
 			partconfig.AddValue("fuelCrossFeed", _fuelCrossFeed);
